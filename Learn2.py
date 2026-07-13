@@ -616,4 +616,3 @@ obj2 = b()
 obj3 = c()
 print(obj1.m1() + obj3.m1() + obj3.m2())
 
- 
