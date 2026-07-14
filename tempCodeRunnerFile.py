@@ -1,9 +1,10 @@
-def most_frequent(text):
-    count = {}
-    for i in text:
-        count[i] = count.get(i,0) + 1
-    max_char = max(count,key=count.get)
-    return max_char,count[max_char]
+def custom_join(iterable, delimiter=" "):
+    current = " "
+    for i, item in enumerate(iterable):
+        if i > 0:
+            current += delimiter
+        current += str(item)
+    return current
 
-word = "programing"
-print(most_frequent(word))
+word = ["Hello","World","123"]
+print(custom_join(word))

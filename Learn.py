@@ -560,3 +560,34 @@ def most_frequent(text):
 
 word = "programing"
 print(most_frequent(word))
+
+# Write your own implementation of split() and don't use split().
+def custom_split(text,delimiter=" "):
+    result  = []
+    current = " "
+    
+    for i in text:
+        if i == delimiter:
+            result.append(current)
+            current = " "
+        else:
+            current += i
+            
+    result.append(current)
+    return result
+
+word = "Hello World 123!"
+print(custom_split(word))
+    
+# Write your own implementation of join() and don't use join()
+def custom_join(iterable, delimiter=" "):
+    current = " "
+    for i, item in enumerate(iterable):
+        if i > 0:
+            current += delimiter
+        current += str(item)
+    return current
+
+word = ["Hello","World","123"]
+print(custom_join(word))
+
