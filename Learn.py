@@ -491,3 +491,72 @@ def reverse_string(text):
 word = "Hello World 123!!"
 print(reverse_string(word))
 
+# Check whether a string is a palindrome. Ignore: spaces, punctuation, case.
+def palindrome(text):
+    cleaned = []
+    for i in text:
+        if i.isalnum():
+            cleaned += i.lower()
+    return cleaned == cleaned[::-1]
+
+texts = "mada,m!"
+print(palindrome(texts))
+
+# OR
+
+def is_pelindrome(word):
+    cleaned = ' '.join(i.lower() for i in word if i.isalnum())
+    return cleaned == cleaned [::-1]
+    
+word = 'Madam'
+print(is_pelindrome(word))
+
+# Compress a string.
+# Ex:- aaabbccccdd -> a3b2c4d2
+
+def string_compresation(text):
+    if not text:
+        return " "
+    
+    compressed = " "
+    count = 1
+    
+    for i in range(1, len(text)):
+        if text[i] == text[i -1]:
+            count += 1
+        else:
+            compressed += text[i - 1] + str(count)
+            count = 1
+    compressed += text[i - 1] + str(count)
+    return compressed
+
+word = "aaabbccccdd"        
+print(string_compresation(word))
+    
+# Find the first non-repeating character.
+# Eg ; programming -> p
+
+def first_non_repeating(text):
+    count = {}
+    for i in text:
+        count[i] = count.get(i,0) + 1
+    for i in text:
+        if count[i] == 1:
+            return i
+        
+    return None
+
+word = "programing"
+print(first_non_repeating(word))
+
+# Find the most frequent character.
+
+def most_frequent(text):
+    count = {}
+    for i in text:
+        count[i] = count.get(i,0) + 1
+    max_char = max(count,key=count.get)
+    return max_char,count[max_char]
+
+word = "programing"
+print(most_frequent(word))
