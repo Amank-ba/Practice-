@@ -306,3 +306,188 @@ print(calculate_salary(40000, 13000)) # 40000, 13000 = arguments
 
 # \What is function scope?
 # Ans: Function scope in python means the region of code where variable is accessable. Every veriable lives inside some scope, and functions create their own scope.\* 
+
+# Write code and explain the output. Explain why each output appears.
+s = "Python"
+
+print(s[0])
+print(s[-1])
+print(s[2])
+print(s[-2])
+# This is basucelly indexing where 0 means first character seems like -1 mean last character and so on..
+
+# Show that strings are immutable.Don't just say they are.Prove it. Then explain why Python made strings immutable.?
+s = "Rock"
+s[0] = 'L'
+
+# Attempting s[0] = "L" fails because Python enforces immutability.
+# Why: Safety & Reliability, Hashing & Performance, Thread Safety, Consistency.
+
+# Predict the output first. Then run. Explain every slice. 
+s = "DataScience"
+
+print(s[:4])
+print(s[4:])
+print(s[::2])
+print(s[::-1])
+print(s[-5:-1])
+
+# This is also a sicing, [:4] means 4 letters from staring like 0,1,2,3 indexes, [4:] everything after 4 letters, [::2] means everything 2nd character
+# [::-1] means reverse this string, [-5:-1] means last 5th to last 2nd character.
+
+# For each method:explain what it does, when you would use it., one real-world example.
+# upper - Upper is besicaly will convert anu string into upper letter
+word = "Python"
+new_word = word.upper()
+print(new_word)
+
+# lower - Lower will convert the string into lower case.
+word = 'PyThon'
+new_word = word.lower()
+print(new_word)
+
+
+# title - This will convert your string first letter into capital letter of each word.
+word = 'welcome to the fight club.!'
+new_word = word.title()
+print(new_word)
+
+
+# capitalize - This will capitalizes only the first letter of the string.
+word = "python"
+new_word = word.capitalize()
+print(new_word)
+
+
+# strip - This will remove the unwanted spaces in the given string.
+word = ' Say_my_name '
+new_word = word.strip()
+print(new_word)
+
+# lstrip - Removes whitespace from the left side.
+word = " Ballia"
+new_word = word.lstrip()
+print(new_word)
+
+
+# rstrip - Remove whitespace from thee right side.
+word = "Ballia "
+new_word = word.rstrip()
+print(new_word)
+
+
+# replace - Replace all occurance of a substring
+word = "ballia"
+new_word = word.replace('ballia','Varanshi')
+print(new_word)
+
+
+# split - Split string into a list by seprators.
+word = "Aman123 Ballia"
+print(word.split())
+
+# join - Joins elements of a list into a string with a separator.
+print(",".join(["2026","07","13"]))  
+
+# find - This find the values in the given string or list that is present or not.
+word = "Welcome to fight club.!"
+print(word.find('fight'))
+
+
+# index - Same as find, but raises error if not found.
+word = "Let me guess.!"
+print(word.index('me')) 
+
+
+# count - This count the occurance (frequency) of substring.
+word = "banana"
+print(word.count('a')) 
+
+# startswith - This will check the if any string starts with prefix.
+word = "Telus International"
+print(word.startswith("I"))
+
+# endswith - This will check if string ends with suffix.
+word = "Telus International"
+print(word.endswith('l'))
+
+# isalpha - This check is the given string or characters are letters.?
+word = "Batman"
+print(word.isalpha())
+
+# isdigit - This check if the given value or all characters are digits.
+word = '12345'
+print(word.isdigit())
+ 
+# isalnum - This check if all characters are letters or digits.
+word = "UttarPradesh277403"
+print(word.isalnum())
+
+# isspace - Checks if string contains only whitespace.
+word = "  "
+print(word.isspace())
+
+# Difference between find() and index().?
+# Ans - you use this to check if something eixst without crashing the program. However, index Returns the index of the first occurrence of a substring.
+
+# Difference between split() and join().
+# Ans - Split break a string into a list of substing based on substrings. However, Combine element of a list into a single string,with seprator 
+# between them.
+
+# Why is ''.join(list) faster than + inside loops?
+# Ans: Because strings are immutable, using + in loops creates a new string object every time, while ''.join(list) builds the final string in 
+ #one pass (fast, O(n)).
+
+# Difference between == and is for string.
+# Ans: we use == to check whether two values contain same values/content. However "is" check Whether two variables point to the same object in memory.
+a = "Python"
+b = "Python"
+print(a is b)
+print( a == b)
+
+# What is string interning.?
+# Ans: String interining is a memory optimization technique in python where certain string are stored only once in the memory and reused whenever
+# the same value appears.
+
+# Problem Solving: Write reusable functions.
+# Count:- Uppercase, Lowercase , Digits ,Spaces, Special characters
+# input: "Hello World 123!!"
+# Return a dictionary.
+
+def count_characters(text):
+    count = {
+        "uppercase" : 0,
+        "lowercase" : 0,
+        "digit": 0,
+        "spaces" : 0,
+        "special" : 0
+    }
+
+    for i in text:
+        if i.isupper():
+            count['uppercase'] += 1
+        elif i.islower():
+            count['lowercase'] += 1
+        elif i.isdigit():
+            count['digit'] += 1
+        elif i.isspace():
+            count['spaces'] += 1
+        else:
+            count['special'] += 1
+    return count
+
+word = "Hello World 123!!"
+result = count_characters(word)
+print(result)
+
+# Write your own: reverse_string() and don't use [::-1].?
+def reverse_string(text):
+    result = " "
+    
+    for i in text:
+        result = i + result
+    return result
+    
+word = "Hello World 123!!"
+print(reverse_string(word))
+
