@@ -1,10 +1,10 @@
-def custom_join(iterable, delimiter=" "):
-    current = " "
-    for i, item in enumerate(iterable):
-        if i > 0:
-            current += delimiter
-        current += str(item)
-    return current
+def palin(text):
+    reverse = " "
+    for i in text:
+        if i.isalnum():
+            reverse += i.lower()
+            
+    return reverse == reverse[::-1]
 
-word = ["Hello","World","123"]
-print(custom_join(word))
+t = "Madam"
+palin(t)

@@ -591,3 +591,221 @@ def custom_join(iterable, delimiter=" "):
 word = ["Hello","World","123"]
 print(custom_join(word))
 
+# Design Thinking
+# For each problem below, don't code immediately. First answer: Input, Output, Edge cases, Algorithm, Time Complexity, Space Complexity.
+# Only then write code.
+# Problem A: Validate an email. Don't use regex.
+
+# Input: A string
+# Output: True/ False
+# Edge cases: Missing @, Multiple @, missing username, Email without domain, empty string, Spaces inside the email.
+# Algorithm: check exactly one @ symbol, Split into local part (before @) and domain part (after @).Validate local part: Not empty.
+# Contains only allowed characters (letters, digits, ., _, -). Doesn’t start or end with . 
+# Validate domain part: Not empty. Must contain at least one . (like example.com). Each section between dots must be non‑empty and alphanumeric.
+# If all checks pass → return True, else False. 
+
+def validate_email(email):
+    if not email:
+        return False
+    if email.count('@') != 1:
+        return False
+    username, domain = email.split('@')
+    if not username:
+        return False
+    if username.startswith(".") or username.endswith("."):
+        return False
+    
+# Username can only have letters, digits, dots, underscores, hyphens
+    allowed = "abcdefghijklmnopqrstuvwxyz" \
+              "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+              "0123456789._-"
+              
+    for i in username:
+        if i not in username:
+            return False
+        
+# Domain validation.
+    if not domain:
+        return False
+    if "." not in domain:
+        return False
+    if domain.startswith(".") or domain.endswith("."):
+        return False
+    if ".." in domain:
+        return False
+
+# Extension validation
+    extension = domain.split(".")[-1]
+    # Extension must be at least 2 characters, (.c is invalid, .com is valid)
+    if len(extension) < 2:
+        return False
+    # Extension can have only letters
+    if i in extension:
+        if i not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ":
+            return False
+    return True
+
+test = "aman@gmail.c"
+print(validate_email(test)) 
+    
+
+# Password validator.
+# Rules: ≥8 chars, uppercase, lowercase, digit, special character.
+
+# Input - Any string the user provides as a password.
+# Output - True / False  → is password valid or not. Specific feedback → WHAT exactly is missing. Missing: uppercase letter, digit, special character.
+# Password too short (minimum 8 characters).
+# Edge Cases - Empty string, only spaces, only lower or digit ot upper, has length but missing upper or lower or digit or special character.
+# Algorithm - If empty → immediately return False. "Password cannot be empty"
+# Check length: If less than 8 characters → add "too short" to errors. Loop through every character once. After loop check all 4 flags
+# Any flag still False → add that to errors list. If errors list is empty → password is valid → True
+# If errors list has items → password invalid → False + show errors
+# Time complexity- O(n) where n = length of password string
+# Space Complexity - O(1) — constant space, Only 4 boolean flags + errors list. Errors list maximum 5 items regardless of password length.
+# No extra data structures that grow with input.
+
+def validate_password(password):
+    # Define special characters allowed
+    special_chars = "!@#$%^&*()_+-=[]{}|;':\",./<>?"
+    
+    # Collect all errors here
+    errors = []
+    # Empty password
+    if not password:
+        return False, ["Password cannot be empty"]
+    
+    # Minimum length
+    if len(password) < 8:
+        errors.append(f"Too short — {len(password)} chars (minimum 8 required)")
+        
+    # Character type flag
+    has_upper = False
+    has_lower = False
+    has_digit = False
+    has_spaces = False
+    has_special = False
+    
+    for i in password:
+        if i.isupper():
+            has_upper = True
+        if i.islower():
+            has_lower = True
+        if i.isdigit():
+            has_digit = True
+        if i in special_chars:
+            has_special = True
+        if i == " ":
+            has_spaces = True
+            
+    # Build an error messages
+    if not has_upper:
+        errors.append("Missing uppercase letters (A-Z)")
+    if not has_lower:
+        errors.append("Missing lowercase letters (a-z)")
+    if not has_digit:
+        errors.append('Missing digits (0-9)')
+    if not has_special:
+        errors.append(f"Missing special character ({special_chars[:10]}...)")
+    if has_spaces:
+        errors.append("Spaces are not allowed")
+    
+    # Result
+    if not errors:
+        return True,["Strong Password"]
+    else:
+        return False, errors
+    
+# Display function — clean output
+def check_password(password):
+    is_valid, messages = validate_password(password)
+    status = "valid" if is_valid else "invalid"
+    print(f"\nPassword : {repr(password)}")
+    print(f"Status   : {status}")
+    
+    if not is_valid:
+        print("Issue :")
+        for i in messages:
+                print(f"  {i}")
+    else:
+        print(f"  {messages[0]}")
+    print("-" * 45)
+    
+test_password = ("Aman!1234")
+check_password(test_password)
+
+############ OR ################
+
+def validate_password(password):
+    special_chars = "!@#$%^&*()_+-=[]{}|;':\",./<>?"
+    
+    rules = [
+        (lambda p: len(p) >=8,
+         "too short, Minimum 8 characters required"),
+        (lambda p: any(i.isupper() for i in p),
+         "Missing uppercase letter (A-Z)"),
+        (lambda p: any(i.islower() for i in p),
+         "Missing lowercase letter (a-z)"),
+        (lambda p: any(i.isdigit() for i in p),
+         "Missing digit (0-9)"),
+        (lambda p: any(i in special_chars for i in p),
+         "Missing special characters"),
+        (lambda p: " " not in p,
+         "Spaces are not allowed")              
+    ]
+    
+    if not password:
+        return False,["Password cannot be empty"]
+    errors = [msg for rule, msg in rules if not rule(password)]
+    
+    is_valid = len(errors) == 0
+    return is_valid,["Strong Password"] if is_valid else errors
+
+def check_password(password):
+    is_valid, messages = validate_password(password)
+    status = "VALID" if is_valid else "INVALID"
+
+    print(f"\nPassword : {repr(password)}")
+    print(f"Status   : {status}")
+    for msg in messages:
+        tag = "  " if is_valid else "  →"
+        print(f"          {tag} {msg}")
+    print("-" * 45)
+    
+test_password = ("Aman1234")
+check_password(test_password)
+ 
+# Username validator.
+# Rules: no spaces, starts with letter, only letters digits underscore.
+
+def validate_username(username):
+    rules = [(
+        lambda p: len(p) >0,
+        "Username cannot be empty"),
+        (lambda p: p[0].isalpha() if p else False,
+         "Must start with letters (a-z) or (A-Z)"),
+        (lambda p: " " not in p,
+         "Spaces are not allowed"),
+        (lambda p: all(c.isalnum() or c == "_" for c in p),
+         "Only letters, digits, and underscore (_) allowed")
+    ]
+    
+    if not username:
+        return False, ["Username cannot be empty"]
+    
+    error = [msg for rule, msg in rules if not rule(username)]
+    is_valid = len(error) == 0
+    return is_valid,["Valid username"] if is_valid else error
+
+def check_username(username):
+    is_valid, messages = validate_username(username)
+    status = "Valid" if is_valid else "Invalid"
+    
+    print(f"\nUsername : {repr(username)}")
+    print(f"Status   : {status}")
+    for msg in messages:
+        tag = "   " if is_valid else "  →"
+        print(f"          {tag} {msg}")
+    print("-" * 45)
+
+t = "Aman0123"
+check_username(t)
