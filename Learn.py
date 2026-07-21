@@ -82,9 +82,9 @@ normalize = lambda x: x / 100
 normalize(200)
 
 # Recursive function
-def factorial(n):
-    if n == 0: return 1
-    return n * factorial(n-1)
+def factorial(num):
+    if num == 0: return 1
+    return num * factorial(num-1)
 
 factorial(5)
 
@@ -133,14 +133,14 @@ def calculate_tax(salary):
 def collect_all_employees():
     employees = []
 
-    print("\n========================================")
+    print("\num========================================")
     print("      EMPLOYEE SALARY CALCULATOR")
     print("========================================")
 
-    n = get_valid_int("\nHow many employees do you want to add? ")
+    num = get_valid_int("\nHow many employees do you want to add? ")
 
-    for i in range(n):
-        print(f"\n--- Employee {i+1} of {n} ---")
+    for i in range(num):
+        print(f"\num--- Employee {i+1} of {num} ---")
 
         name = input("  Name        : ").strip()
         while not name:
@@ -188,7 +188,7 @@ def display_table(employees):
     )
 
     # header
-    print("\n\n========================================")
+    print("\num\num========================================")
     print("         EMPLOYEE SUMMARY TABLE")
     print("========================================")
     print(sep)
@@ -233,11 +233,11 @@ def display_table(employees):
     print(sep)
 
     # bottom summary
-    print(f"\n  Total Employees : {len(employees)}")
+    print(f"\num  Total Employees : {len(employees)}")
     print(f"  Total Payroll   : ₹{total_salary:,.0f}")
     print(f"  Total Tax       : ₹{total_tax:,.0f}")
     print(f"  Total Net Pay   : ₹{total_net:,.0f}")
-    print("\n========================================\n")
+    print("\num========================================\num")
 
 
 def main():
@@ -436,7 +436,7 @@ print(word.isspace())
 
 # Why is ''.join(list) faster than + inside loops?
 # Ans: Because strings are immutable, using + in loops creates a new string object every time, while ''.join(list) builds the final string in 
- #one pass (fast, O(n)).
+ #one pass (fast, O(num)).
 
 # Difference between == and is for string.
 # Ans: we use == to check whether two values contain same values/content. However "is" check Whether two variables point to the same object in memory.
@@ -660,7 +660,7 @@ print(validate_email(test))
 # Check length: If less than 8 characters → add "too short" to errors. Loop through every character once. After loop check all 4 flags
 # Any flag still False → add that to errors list. If errors list is empty → password is valid → True
 # If errors list has items → password invalid → False + show errors
-# Time complexity- O(n) where n = length of password string
+# Time complexity- O(num) where num = length of password string
 # Space Complexity - O(1) — constant space, Only 4 boolean flags + errors list. Errors list maximum 5 items regardless of password length.
 # No extra data structures that grow with input.
 
@@ -809,3 +809,314 @@ def check_username(username):
 
 t = "Aman0123"
 check_username(t)
+
+# Count vowels
+def count_vowels(text):
+    vowels = "aeiouAEIOU"
+    return sum(1 for i in text if i in vowels)
+
+print(count_vowels("Mango"))
+    
+# Count digits
+def count_digit(digit):
+    return sum(1 for i in digit if i.isdigit())
+
+print(count_digit("aman012364"))
+
+# Count spaces
+def count_spaces(text):
+    return sum(1 for i in text if i == " ")
+
+print(count_spaces("am a num"))
+
+# Find largest number
+def largest_num(digit):
+    if not digit:
+        return None
+    largest = digit[0]
+    for i in digit:
+        if i > largest:
+            largest = i
+    return largest
+
+print(largest_num([1, 9, 3, 7]))
+
+# Find smallest number
+def smallest_num(digit):
+    if not digit:
+        return None
+    small_num = digit[0]
+    for i in digit:
+        if i < small_num:
+            small_num = i
+    return small_num
+    
+print(smallest_num([32,23,43,6]))
+
+# Sum only even numbers
+def sum_even(digit):
+    return sum(i for i in digit if i %2 == 0)
+
+print(sum_even([2,3,4,5,6]))
+
+# Reverse a string (without slicing)
+def reverse_string(text):
+    string = " "
+    for i in text:
+        string = i + string
+    return string
+
+print(reverse_string("Batman")) 
+
+# Remove duplicates
+def remove_duplicates(items):
+    seen = set()
+    result = []
+    for item in items:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
+    return result
+
+print(remove_duplicates([1, 2, 2, 3, 1]))
+
+# Find longest word
+def longest_word(text):
+    word = text.split()
+    if not word:
+        return None
+    longest = word[0]
+    for i in word:
+        if len(i) > len(longest):
+            longest = i
+    return longest
+
+print(longest_word("I love programming"))
+
+# Count consonants.
+def count_consonants(text):
+    vowels = ("aeiouAEIOU")
+    return sum(1 for i in text if i.isalpha() and i not in vowels)
+
+print(count_consonants("Fight123"))
+
+# Count uppercase letters.
+def count_uppercase(text):
+    return sum(1 for i in text if i.isupper())
+
+print(count_uppercase("AmanKumar"))
+
+# Count lowercase letters.
+def count_lowercase(text):
+    return sum(1 for i in text if i.islower())
+
+print(count_lowercase("AMANKUMar"))
+
+# Count special characters.
+def count_special(text):
+    special_chars = "!@#$%^&*()_+-=[]{}|;':\",./<>?"
+    return sum(1 for i in text if i in special_chars)
+
+print(count_special("Sun@123#"))
+
+# Find the second largest number.
+def  second_largest(num):
+    if len(num) < 2:
+        return None
+    first = second = float('-inf')
+    for i in num:
+        if i > first:
+            second = first
+            first = i
+        elif i > second and i != first:
+            second = i
+            
+    return second if second != float('-inf') else None
+
+print(second_largest([10, 20, 4, 45, 99]))
+
+# Find the second smallest number.
+def second_smallest(num):
+    if len(num) < 2:
+        return None
+    first = second = float('inf')
+    for i in num:
+        if i < first:
+            second = first
+            first = i
+        elif i < second and i != first:
+            second = i
+    return second if second != float('inf') else None
+        
+print(second_smallest([10, 20, 4, 45, 99]))
+
+# Find the first negative number.
+def first_negative(num):
+    for i in num:
+        if i < 0:
+            return i
+    return None
+
+print(first_negative([5, -2, -7, 10]))
+
+# Find the index of the first vowel.
+def first_vowel_index(text):
+    vowel = "aeiouAEIOU"
+    for idx, i in enumerate(text):
+        if i in vowel:
+            return idx
+    return None
+
+print(first_vowel_index("Python")) 
+
+# Average of odd numbers only.
+def avg_odd_num(num):
+    odds = [i for i in num if i % 2 != 0]
+    if not odds:
+        return None
+    return sum(odds) / len(odds)
+
+print(avg_odd_num([1, 2, 3, 4, 5]))
+
+# Product of all positive numbers.
+def product_of_positive(num):
+    product = 1
+    found = False
+    for i in num:
+        if i > 0:
+            product *= i
+            found = True
+    return product if found else None
+
+print(product_of_positive([2, -2, 3, 4]))     
+
+# Difference between largest and smallest.
+def difference_max_min(num):
+    if not num:
+        return None
+    return max(num) - min(num)
+
+print(difference_max_min([2,3,4,5,6]))
+
+# Return only prime numbers.
+def is_prime(num):
+    if num <=1:
+        return False
+    if num == 2:
+        return False
+    if num % 2 == 0:
+        return False
+    for i in range(3, int(num**0.5) + 1, 2):
+        if num % i == 0:
+            return False
+    return True
+
+def primes_only(nums):
+    return [num for num in nums if is_prime(num)]
+
+print(primes_only([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+
+# Return words longer than five letters.
+def word_more_then_5(text):
+    word = text.split()
+    return[i for i in word if len(i) > 5]
+
+print(word_more_then_5("python programing is powerful and enjoyable"))
+
+# Remove all digits from a string.
+def remove_digits(text):
+    return ''.join(i for i in text if not i.isdigit())
+
+print(remove_digits("Hello123World456")) 
+
+# Return only unique vowels.
+def unique_vowels(text):
+    vowels = "aeiouAEIOU"
+    found = {i.lower() for i in text if i in vowels}
+    return sorted(found) if found else None
+
+print(unique_vowels("Programming is powerful"))
+
+# Count occurrences of each character.
+def char_count(text):
+    counts = {}
+    for ch in text:
+        counts[ch] = counts.get(ch, 0) + 1
+    return counts
+
+print(char_count("banana"))
+
+# Most frequent word.
+from collections import Counter
+
+def most_frequent_word(text):
+    word = text.split()
+    count = Counter(word)
+    return count.most_common(1)[0]
+
+print(most_frequent_word("apple banana apple orange banana apple"))
+
+# Least frequent character.
+def least_frequent_char(text):
+    counts = Counter(text)
+    min_count = min(counts.values())
+    return [ch for ch, cnt in counts.items() if cnt == min_count]
+
+print(least_frequent_char("hello world"))
+
+# Check if two strings are anagrams
+def are_anagrams(str1, str2):
+    # remove spaces and convert to lowercase for fair comparison
+    str1, str2 = str1.replace(" ", "").lower(), str2.replace(" ", "").lower()
+    
+    # if lengths differ, they can't be anagrams
+    if len(str1) != len(str2):
+        return False
+    
+    counts = {}
+    
+    # count characters in str1
+    for ch in str1:
+        counts[ch] = counts.get(ch, 0) + 1
+    
+    # subtract counts using str2
+    for ch in str2:
+        if ch not in counts:
+            return False
+        counts[ch] -= 1
+        if counts[ch] < 0:
+            return False
+    
+    return True
+
+print(are_anagrams("listen", "silent"))   # True
+print(are_anagrams("hello", "world"))     # False
+
+# Rotate a string left by one character
+def rotate_left(text):
+    if len(text) <= 1:
+        return text
+    return text[1:] + text[0]
+
+print(rotate_left("Python"))   # "ythonP"
+
+# Count how many numbers in a list are greater than 50.
+# Count how many strings in a list have more than 5 characters.
+# Given a sentence, count how many words start with a vowel (a, e, i, o, u).
+# Count how many even numbers exist in a list.
+# Count how many times the digit 3 appears across all numbers in a list.
+# Given a list of temperatures, count how many days were above 35°C.
+# Count how many negative numbers are in a list.
+# Given a list of words, count how many are palindromes.
+# Count how many numbers in a list are divisible by both 3 and 5.
+# Given a list of student scores, count how many students passed (score >= 40).
+# Count how many characters in a string are uppercase letters.
+# Given a list of lists, count how many inner lists have more than 3 elements.
+# Count how many numbers in a list are perfect squares.
+# Given a list of emails, count how many contain the word "gmail".
+# Count how many numbers in a list are between 10 and 50 (inclusive).
+# Given a string, count how many words have exactly 4 letters.
+# Count how many elements in a list appear more than once.
+# Given a list of prices, count how many items cost less than ₹500.
+# Count how many numbers in a list are prime.
+# Given a list of dates (as strings "YYYY-MM-DD"), count how many fall in the year 2023.
