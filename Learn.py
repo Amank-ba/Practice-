@@ -1101,6 +1101,9 @@ def rotate_left(text):
 print(rotate_left("Python"))   # "ythonP"
 
 # Count how many numbers in a list are greater than 50.
+
+
+
 # Count how many strings in a list have more than 5 characters.
 # Given a sentence, count how many words start with a vowel (a, e, i, o, u).
 # Count how many even numbers exist in a list.
