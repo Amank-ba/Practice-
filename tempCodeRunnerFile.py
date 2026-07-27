@@ -1,16 +1,8 @@
-from collections import Counter
+def count_long_lists(data):
+    count = 0
+    for i in data:
+        if len(i) >= 3:
+            count += 1
+    return count
 
-# def most_frequent_word(text):
-#     word = text.split()
-#     count = Counter(word)
-#     return count.most_common(1)[0]
-
-# print(most_frequent_word("apple banana apple orange banana apple"))
-
-# Least frequent character.
-def least_frequent_char(text):
-    counts = Counter(text)
-    min_count = min(counts.values())
-    return [ch for ch, cnt in counts.items() if cnt == min_count]
-
-print(least_frequent_char("hello world"))
+print(count_long_lists([[1,2,3], [4,5,6,7], [8], [9,10,11,12,13]]))

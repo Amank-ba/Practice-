@@ -1101,25 +1101,196 @@ def rotate_left(text):
 print(rotate_left("Python"))   # "ythonP"
 
 # Count how many numbers in a list are greater than 50.
+def num_check(num):
+    count = 0
+    for i in num:
+        if i > 50:
+            count += 1
+    return count
 
-
+print(num_check([20, 12, 65, 70, 51, 31]))
 
 # Count how many strings in a list have more than 5 characters.
+def string_count(text):
+    word = text.split()
+    return [i for i in word if len(i) > 5]
+
+print(string_count("Welcome to the fightclub"))
+
 # Given a sentence, count how many words start with a vowel (a, e, i, o, u).
+def count_vowel(text):
+    vowel = "aeiouAEIOU"
+    count = 0
+    word = text.split()
+    
+    for i in word:
+        if i[0] in vowel:
+            count += 1
+    return count
+
+print(count_vowel("Apple is on the orange table"))
+
 # Count how many even numbers exist in a list.
+def even_num(num):
+    return sum(1 for i in num if i % 2 == 0)
+
+print(even_num([2,3,4,5,6]))
+
 # Count how many times the digit 3 appears across all numbers in a list.
+def num_count(num):
+    count = 0
+    for i in num:
+        for j in str(i):
+            if j == "3":
+                count += 1
+    return count
+
+print(num_count([1,1,2,3,0,3,3,0,3,]))
+
 # Given a list of temperatures, count how many days were above 35°C.
+def check_temp(temperatures):
+    count = 0
+    for i in temperatures:
+        if i > 35:
+            count += 1
+    return count
+
+print(check_temp([12,35,39,85,52]))
+
 # Count how many negative numbers are in a list.
+def count_negative(num):
+    count = 0
+    for i in num:
+        if i < 0:
+            count += 1
+    return count
+
+print(count_negative([0,-1,5,8,-3]))
+
 # Given a list of words, count how many are palindromes.
+def palindrome(text):
+    replace = []
+    for i in text:
+        if i.isalnum():
+            replace += i.lower()
+    return replace == replace[::-1]
+
+print(palindrome("Nitin"))
+
+
 # Count how many numbers in a list are divisible by both 3 and 5.
+def check_num(num):
+    return sum(1 for i in num if i % 3 == 0 and i % 5 == 0)
+
+print(check_num([12,34,30,15,50]))
+
 # Given a list of student scores, count how many students passed (score >= 40).
+def check_score(score):
+    count_pass = 0
+    for i in score:
+        if i >= 40:
+            count_pass += 1
+    return count_pass
+
+print(check_score([23,52,47,65,12]))            
+
 # Count how many characters in a string are uppercase letters.
+def uppercase_count(text):
+    count = 0
+    for i in text:
+        if i.isupper():
+            count += 1
+    return count
+
+print(uppercase_count("HelloWorld"))
+
 # Given a list of lists, count how many inner lists have more than 3 elements.
+def count_long_lists(data):
+    count = 0
+    for i in data:
+        if len(i) > 3:
+            count += 1
+    return count
+
+print(count_long_lists([[1,2,3], [4,5,6,7], [8], [9,10,11,12,13]]))
+
 # Count how many numbers in a list are perfect squares.
+import math
+def count_perfect_square(num):
+    count = 0
+    for i in num:
+        if i >= 0:
+            root = int(math.sqrt(i))            
+            if root * root == i:
+                count += 1
+    return count
+
+print(count_perfect_square([4, 9, 15, 16, 20, 25]))
+
+
 # Given a list of emails, count how many contain the word "gmail".
+def count_gmail(gmail):
+    count = 0
+    for i in gmail:
+        if "gmail" in i.lower():
+            count += 1
+    return count
+
+print(count_gmail(["abc@gmail.com", "xyz@yahoo.com", "test@GMAIL.com", "hello@outlook.com"]))
+
 # Count how many numbers in a list are between 10 and 50 (inclusive).
+def num_check(num):
+    count = 0
+    for i in num:
+        if i >=10 and i <= 50:
+            count += 1
+    return count
+
+print(num_check([5, 10, 25, 50, 60, 45]))
+
 # Given a string, count how many words have exactly 4 letters.
+def check_word_len(word):
+    count = 0
+    words = word.split()
+    for i in words:
+        if len(i) == 4:
+            count += 1
+    return count
+
+print(check_word_len("This code will find four word tests"))
+
 # Count how many elements in a list appear more than once.
+def count_duplicates(num):
+    count = 0
+    for i in set(num):
+        if num.count(i) > 1:
+            count += 1
+    return count
+
+print(count_duplicates([1, 2, 2, 3, 4, 4, 5, 5, 6]))
+
 # Given a list of prices, count how many items cost less than ₹500.
+def check_price(price):
+    return sum(1 for i in price if i < 500)
+
+print(check_price([200, 450, 600, 499, 800, 120]))
+
 # Count how many numbers in a list are prime.
+def check_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def count_prime(nums):
+    count = 0
+    for i in nums:
+        if check_prime(i):
+            count += 1
+    return count
+
+print(count_prime([2, 3, 4, 5, 6, 7, 8, 9, 10, 11]))
+
 # Given a list of dates (as strings "YYYY-MM-DD"), count how many fall in the year 2023.
