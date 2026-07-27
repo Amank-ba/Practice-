@@ -1294,3 +1294,224 @@ def count_prime(nums):
 print(count_prime([2, 3, 4, 5, 6, 7, 8, 9, 10, 11]))
 
 # Given a list of dates (as strings "YYYY-MM-DD"), count how many fall in the year 2023.
+def count_2023_dates(date):
+    count = 0
+    for i in date:
+        if i.startswith('2023-'):
+            count += 1
+    return count
+
+print(count_2023_dates(["2023-01-15", "2022-12-31", "2023-07-20", "2024-03-10"]))
+
+# Find the first number in a list that is divisible by 7.
+def check_devisible(num):
+    for i in num:
+        if i % 7 == 0:
+            return i
+    return None
+
+print(check_devisible([5, 10, 14, 20, 28]))  
+
+# Search for a name in a list and return its index. If not found, return -1.
+def search_index(name, target):
+    for i in range(len(name)):
+        if name[i] == target:
+            return i
+    return -1
+
+print(search_index(["Aman", "Ravi", "Priya", "Neha"], "Priya"))
+
+# Find the last occurrence of a given element in a list.
+def last_occurance(lst,target):
+    for i in range(len(lst)-1,-1,-1):
+        if lst[i] == target:
+            return i
+    return -1
+
+print(last_occurance([1,2,3,2,4,5,2],2))
+
+# Given a list of words, find the first word that has more than 8 characters.
+def check_word_len(text):
+    word = text.split()
+    for i in word:
+        if len(i) > 8:
+            return i
+    return None
+
+print(check_word_len("This sentence contains extraordinary words"))
+
+# Search a list of numbers and return the first negative number found.
+def negative_num(num):
+    for i in num:
+        if i < 0:
+            return i
+    return None
+
+print(negative_num([0,1,3,-1,9,-2]))
+
+# Given a list of dictionaries (each with a "name" key), find the dictionary where name equals "Aman".
+def find_person(name):
+    for i in name:
+        if i.get("name") == "Aman":
+            return i
+    return None
+people = [
+    {"name": "Ravi", "age": 25},
+    {"name": "Priya", "age": 30},
+    {"name": "Aman", "age": 28},
+    {"name": "Neha", "age": 22}
+]
+print(find_person(people))
+
+# Find the index of the maximum value in a list without using max().
+def index_of_max(lst):
+    if not lst:
+        return -1
+    
+    max_val = lst[0]
+    max_index = 0
+    
+    for i in range(1, len(lst)):
+        if lst[i] > max_val:
+            max_val = lst[i]
+            max_index = i
+    return max_index
+print(index_of_max([10, 25, 7, 30, 18]))
+
+# Given a list of strings, find the first string that starts and ends with the same character.
+def check_string(text):
+    for i in text:
+        if i[0] == i[-1]:
+            return i
+    return None
+
+print(check_string(["apple", "banana", "civic", "level"]))
+
+# Search for the first duplicate in a list (first number that has already appeared before it).
+def search_duplicate(num):
+    seen = set()
+    for i in num:
+        if i in seen:
+            return i
+        seen.add(i)
+    return None
+
+print(search_duplicate([3, 5, 2, 4, 5, 6, 2]))
+
+# Given a 2D list (matrix), find the position (row, col) of a target value.
+def find_position(matrix,target):
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            if matrix[i][j] == target:
+                return (i,j)
+    return None
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+print(find_position(matrix,50))            
+
+# Find the first pair of adjacent elements in a list where the second is smaller than the first.
+def first_desc_pair(lst):
+    for i in range(len(lst) -1):
+        if lst[i+1] < lst[i]:
+            return (lst[i], lst[i+1])
+    return None
+print(first_desc_pair([5, 7, 4, 6, 8]))
+
+
+# Given a list of numbers, find the first number that is greater than the average of the list.
+def greater_num(num):
+    if not num:
+        return None
+    avg = sum(num) / len(num)
+    for i in num:
+        if i > avg:
+            return i
+    return None
+print(greater_num([2, 4, 6, 8]))
+
+# Search a string for the first character that appears more than once.
+def first_duplicate_num(text):
+    seen = set()
+    for i in text:
+        if i in seen:
+            return i
+        seen.add(i)
+    return None
+print(first_duplicate_num("programming"))
+
+
+# Given a list of tuples (name, score), find the name of the person with the highest score.
+def highest_socre(data):
+    if not data:
+        return None
+    max_name, max_score = data[0]
+    for i, j in data[1:]:
+        if j > max_score:
+            max_name, max_score = i, j
+    return max_name
+
+people = [("Ravi", 85), ("Priya", 92), ("Aman", 95), ("Neha", 88)]
+print(highest_socre(people))
+
+# Find the first missing positive integer in an unsorted list.
+def missing_num(num):
+    num = set(num)
+    i = 1
+    while True:
+        if i not in num:
+            return i
+        i += 1
+print(missing_num([3, 4, -1, 1]))
+    
+# Given a list of words, find the first word that is a substring of the next word.
+def first_substring(text):
+    for i in range(len(text)-1):
+        if text[i] in text[i+1]:
+            return text[i]
+    return None
+print(first_substring(["car", "cartoon", "dog", "cat"]))
+
+# Search a list for the first number that is both even and greater than 100.
+def even_greater_num(num):
+    for i in num:
+        if i % 2 == 0 and i > 100:
+            return i
+    return None
+print(even_greater_num([50, 75, 102, 99, 200]))
+
+# Given a list of prices, find the first item where price drops compared to the previous item.
+def first_price_drop(price):
+    for i in range(1, len(price)):
+        if price[i] < price[i-1]:
+            return price[i]
+    return None
+print(first_price_drop([100, 120, 115, 130, 125]))
+
+# Find the index of the second occurrence of a given value in a list.
+def second_occurance(lst,target):
+    count = 0
+    for i in range(len(lst)):
+        if lst[i] == target:
+            count += 1
+            if count == 2:
+                return i
+    return None
+print(second_occurance([10, 20, 30, 20, 40, 20], 20))
+        
+# Given a list of sentences, find the first sentence that contains more than 5 words.
+def first_sentence_more_than_5_words(sentences):
+    for sentence in sentences:
+        if len(sentence.split()) > 5:
+            return sentence
+    return None
+sentences = [
+    "I love Python",
+    "Python is very easy to learn and use",
+    "Hello World"
+]
+
+print(first_sentence_more_than_5_words(sentences))
+
