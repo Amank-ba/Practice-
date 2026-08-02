@@ -1515,3 +1515,379 @@ sentences = [
 
 print(first_sentence_more_than_5_words(sentences))
 
+# Find the sum of all odd numbers from 1 to n.
+def sum_of_odds(num):
+    total = 0
+    for i in range(1, num + 1):
+        if i % 2 != 0:
+            total += i
+    return total
+
+print(sum_of_odds(10))
+
+# Calculate the product of all numbers in a list (without using any built-in).
+def prod_of_num(num):
+    result = 1
+    for i in num:
+        result *= i
+    return result
+
+print(prod_of_num([5,1,2,6]))
+
+# Build a new list containing only the squares of numbers from 1 to n.
+def square_of_n(n):
+    result = []
+    for i in range(1, n + 1):
+        result.append( i * i)
+    return result
+
+print(square_of_n(10))
+
+# Concatenate all strings in a list into a single string, separated by " | ".
+def concat_strings(text):
+    result = " "
+    for i in range(len(text)):
+        result += text[i]
+        if i != len(text) - 1:
+            result += " | "
+    return result
+
+print(concat_strings(["SQL", "Python", "Pandas"]))
+
+# Find the sum of all digits of a given number (e.g., 1234 → 10).
+def digit_sum(number):
+    number = abs(number)
+    digits = str(number)
+    total = 0
+    for ch in digits:
+        total += int(ch)
+    return total
+tests = [1234, 9999, 0, -456, 100, 5, 999999, -1000]
+
+# Loop through list — pass ONE number at a time
+for n in tests:
+    print(f"{n:>10}  →  digit sum = {digit_sum(n)}")
+
+# Build a running total list: given [1,2,3,4], produce [1,3,6,10].
+def running_total(num):
+    result = []
+    total = 0
+    for i in num:
+        total += i
+        result.append(total)
+    return result
+
+print(running_total([1,2,3,4,5]))
+
+# Compute the sum of every alternate element in a list (index 0, 2, 4...).
+def sum_alternate(num):
+    total = 0
+    for i in range(0, len(num),2):
+        total += num[i]
+    return total
+
+# ---------- OR --------------
+def sum_alternate(num):
+    return sum(num[::2])
+
+print(sum_alternate([0,1,3,5,9]))
+
+# Given a list of words, build a new list of their lengths.
+def len_word(word):
+    result = []
+    for i in word:
+        result.append(len(i))
+    return result
+
+print(len_word(["SQL", "Python", "Data", "Science"]))
+
+# Calculate the sum of squares of all numbers from 1 to n.
+def sum_of_square(num):
+    result = 0
+    for i in range(1, num +1):
+        result += i * i
+    return result
+
+print(sum_of_square(5))
+
+# Given a list of prices with a 10% discount, build a list of discounted prices.
+def discounted_price(price):
+    result = []
+    for i in price:
+        result.append(i * 0.9)
+    return result
+
+print(discounted_price([100, 250, 400]))
+
+# Find the product of only the positive numbers in a list.
+def positive_num(num):
+    result = 1
+    found = False
+    for i in num:
+        if i > 0:
+            result *= i
+            found = True
+    return result if found else 0
+
+print(positive_num([2, -3, 4, 0, 5]))
+
+# Build a string that reverses each word in a sentence but keeps word order. (e.g., "hello world" → "olleh dlrow")
+def reverse_words(text):
+    word = text.split()
+    result = []
+    for i in word:
+        result.append(i[::-1])
+    return " ".join(result)
+
+print(reverse_words("Hello World"))        
+
+# Accumulate a list of only unique elements from a given list, preserving order.
+def unique_element(item):
+    result = []
+    seen = set()
+    for i in item:
+        if i not in seen:
+            result.append(i)
+            seen.add(i)
+    return result
+
+print(unique_element([1,1,1,2,4,3,3,4,5]))
+
+# Given a list of numbers, build a new list where each element is the difference from the previous element. First element stays as is.
+def diff_element(num):
+    if not num:
+        return []
+    result = [num[0]]
+    for i in range(1,len(num)):
+        diff = num[i] - num[i-1]
+        result.append(diff)
+    return result
+
+print(diff_element([1,2,4,5]))
+
+# Find the sum of all numbers in a list that are greater than the running average up to that point.
+def sum_greater_then_running(num):
+    total_sum = 0
+    running_sum = 0
+    count = 0
+    for i in num:
+        count += 1
+        running_sum += i
+        running_avg = running_sum / count
+        if i > running_avg:
+            total_sum += i
+    return total_sum
+
+print(sum_greater_then_running([2, 4, 6, 8]))
+
+# Build a multiplication table for a given number n (1×n to 10×n) as a list.
+def math_table(num):
+    result = []
+    for i in range(1,11):
+        result.append(i * num)
+    return result
+
+print(math_table(5))
+
+# Given a list of sentences, accumulate a list of word counts per sentence.
+def count_senteces(text):
+    result = []
+    for i in text:
+        word = i.split()
+        count = len(word)
+        result.append(count)
+    return result
+
+print(count_senteces(["Python is fun and easy"]))
+
+# Compute the factorial of n using accumulation (no recursion).
+def factorial(n):
+    count = 1
+    for i in range(1, n+1):
+        count *= i
+    return count
+
+print(factorial(5))
+
+# Given a list of temperatures in Celsius, build a list converted to Fahrenheit.
+def celsius_to_fahrenheit(lst):
+    result = []
+    for i in lst:
+        f = (i * 9/5) + 32 
+        result.append(f)
+    return result
+
+print(celsius_to_fahrenheit([0, 20, 37, 100]))
+
+# Accumulate only the numbers from a mixed list (containing both strings and numbers).
+def accumulate_numbers(item):
+    result = []
+    for i in item:
+        if isinstance(i,(int, float)):
+            result.append(i)
+    return result
+
+print(accumulate_numbers([10, "apple", 3.5, "banana", -2, "42", 7]))
+
+# Filter all even numbers from a list.
+def even_filter(num):
+    result = []
+    for i in num:
+        if i % 2 == 0:
+            result.append(i)
+    return result
+
+print(even_filter([1,2,3,4,5,6,7,8]))
+
+# From a list of words, keep only words longer than 4 characters.
+def word_check(text):
+    result = []
+    word = text.split()
+    for i in word:
+        if len(i) > 4:
+            result.append(i)
+    return result
+
+print(word_check("I am amans friend"))
+        
+# Filter out all negative numbers from a list, keeping only positives.
+def filter_positive(num):
+    result = []
+    for i in num:
+        if i > 0:
+            result.append(i)
+    return result
+
+print(filter_positive([1,2,-3,0,-4,]))
+
+# Given a list of names, return only names that start with "A".
+def start_with_a(text):
+    result = []
+    for i in text:
+        if i.startswith("A"):
+            result.append(i)
+    return result
+
+print(start_with_a(["Aman", "Ravi", "Anita", "Sunil", "Arjun"]))
+
+# From a list of numbers, filter only those divisible by 3 but not by 9.
+def filter_division(num):
+    result = []
+    for i in num:
+        if i % 3 == 0 and i % 9 != 0:
+            result.append(i)
+    return result
+
+print(filter_division([3, 6, 9, 12, 15, 18, 21, 27]))
+
+# Given a list of emails, filter only valid ones (must contain "@" and ".").
+def email_check(email):
+    result = []
+    for i in email:
+        if "@" in i and "." in i:
+            result.append(i)
+    return result
+
+print(email_check([
+    "aman@example.com",
+    "friend@gmail",
+    "test@domain.org",
+    "hello.world",
+    "user@site.co.in"]))
+
+# Filter all prime numbers from a list of integers.
+import math
+def check_prime(num):
+    if num < 2:
+        return False
+    for i in range(2,int(math.sqrt(num))+1):
+        if num % i == 0:
+            return False
+    return True
+def filter_number(prime):
+    result = []
+    for i in prime:
+        if check_prime(i):
+            result.append(i)
+    return result
+
+print(filter_number([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]))
+
+# From a list of dictionaries (each with "age" key), keep only those where age >= 18.
+def filter_adults(age):
+    result = []
+    for i in age:
+        if i.get("age",0)>= 18:
+            result.append(i)
+    return result
+
+print(filter_adults([
+    {"name": "Aman", "age": 22},
+    {"name": "Ravi", "age": 16},
+    {"name": "Anita", "age": 18},
+    {"name": "Sunil", "age": 15}
+]))
+
+# Given a list of strings, filter out any that contain numeric characters.
+def filter_numeric(lst):
+    result = []
+    for i in lst:
+        if not any(j.isdigit() for j in i):
+            result.append(i)
+    return result
+
+print(filter_numeric(["apple", "banana123", "grape", "mango9", "pear"]))
+
+# From a list of numbers, keep only those that appear exactly once.
+
+
+# Filter all words from a sentence that are not stop words. Stop words = ["is", "the", "a", "an", "and", "to"].
+# Given a list of tuples (product, price), filter only items where price is between ₹100 and ₹1000.
+# From a list of numbers, keep only those whose digit sum is even.
+# Given a list of strings, filter only those that are valid Python identifiers (no spaces, no special chars, doesn't start with digit).
+# Filter all numbers from a list that are larger than both their neighbours (local maximums).
+# From a list of sentences, filter only sentences that end with a question mark.
+# Given a list of numbers, filter those that are perfect cubes.
+# From a mixed list, filter only the string elements.
+# Given a list of words, filter only those where all vowels come before all consonants.
+# From a list of numbers, keep only those where the number reversed is also in the list.
+# Count the frequency of each character in a string.
+# Given a list of numbers, find which number appears the most (mode).
+# Count the frequency of each word in a sentence.
+# Given a list, find all elements that appear exactly twice.
+# Count how many times each digit (0–9) appears in a given number.
+# Given a list of scores, count how many fall in each grade band: A(90+), B(75–89), C(60–74), D(below 60).
+# Find the least frequent element in a list.
+# Given a paragraph, find the top 3 most frequent words.
+# Count the frequency of each vowel in a string.
+# Given a list, return a list of elements that appear more than n times.
+# Given a list of words, count how many unique first letters exist.
+# Count how many times each unique length appears among a list of strings.
+# Given a list of numbers, find all numbers that appear an odd number of times.
+# Given a list of transactions (positive = credit, negative = debit), count how many of each type.
+# Count the frequency of each day name in a list of date strings (format: "YYYY-MM-DD").
+# Given a list of numbers, find the second most frequent element.
+# Count how many elements in a list appear only once (unique elements).
+# Given a sentence, count the frequency of each word length (e.g., "3-letter words: 4 times").
+# Given a list of items, detect if any element appears more than half the total count.
+# Given two lists, count how many elements are common (appear in both), counting frequency.
+# Given a list of numbers, return True if all numbers are positive.
+# Check if a list is sorted in ascending order.
+# Given a list, return True if any two adjacent elements are equal.
+# Given a number n, check if it is a perfect number (sum of its divisors equals itself). e.g., 6 = 1+2+3.
+# Given two lists of equal length, return True if they are mirror images of each other.
+# Check if a given string is an anagram of another string.
+# Given a list of numbers, return True if there exists a pair that sums to a given target k.
+# Given a number, check if it's a Harshad number (divisible by the sum of its own digits).
+# Given a list, return True if it has more even numbers than odd numbers.
+# Given a string, check if all characters are unique (no duplicates).
+# Given a list of numbers, check if any number equals the sum of all others.
+# Given a word, check if it is a pangram sentence — contains every letter of the alphabet at least once.
+# Given a list of numbers, return True if the list contains a "peak" — a number greater than all before it and all after it.
+# Given two strings, check if one is a rotation of the other (e.g., "abcd" and "cdab").
+# Given a list, check if it can be split into two halves with equal sums.
+# Given a number n, check if it is a Kaprekar number (e.g., 45² = 2025 → 20+25 = 45).
+# Given a list of booleans, return True if more than half are True.
+# Given a list of numbers, check if removing exactly one element can make the list sorted.
+# Given a string, check if the brackets (), [], {} are balanced and properly nested.
+# Given a list of numbers, check if any subset of them (contiguous) sums to exactly zero.

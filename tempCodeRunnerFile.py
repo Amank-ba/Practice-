@@ -1,8 +1,13 @@
-def count_long_lists(data):
-    count = 0
-    for i in data:
-        if len(i) >= 3:
-            count += 1
-    return count
+def filter_adults(age):
+    result = []
+    for i in age:
+        if i.get("age",0)>= 18:
+            result.append(i)
+    return result
 
-print(count_long_lists([[1,2,3], [4,5,6,7], [8], [9,10,11,12,13]]))
+print(filter_adults([
+    {"name": "Aman", "age": 22},
+    {"name": "Ravi", "age": 16},
+    {"name": "Anita", "age": 18},
+    {"name": "Sunil", "age": 15}
+]))
