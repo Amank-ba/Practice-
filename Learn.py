@@ -970,13 +970,13 @@ def first_vowel_index(text):
 print(first_vowel_index("Python")) 
 
 # Average of odd numbers only.
-def avg_odd_num(num):
+def avg_odd_count(num):
     odds = [i for i in num if i % 2 != 0]
     if not odds:
         return None
     return sum(odds) / len(odds)
 
-print(avg_odd_num([1, 2, 3, 4, 5]))
+print(avg_odd_count([1, 2, 3, 4, 5]))
 
 # Product of all positive numbers.
 def product_of_positive(num):
@@ -1131,10 +1131,10 @@ def count_vowel(text):
 print(count_vowel("Apple is on the orange table"))
 
 # Count how many even numbers exist in a list.
-def even_num(num):
+def even_count(num):
     return sum(1 for i in num if i % 2 == 0)
 
-print(even_num([2,3,4,5,6]))
+print(even_count([2,3,4,5,6]))
 
 # Count how many times the digit 3 appears across all numbers in a list.
 def num_count(num):
@@ -1839,55 +1839,579 @@ def filter_numeric(lst):
 print(filter_numeric(["apple", "banana123", "grape", "mango9", "pear"]))
 
 # From a list of numbers, keep only those that appear exactly once.
+def unique_num(num):
+    result = []
+    for i in num:
+        if num.count(i) == 1:
+            result.append(i)
+    return result
 
+print(unique_num([1, 2, 2, 3, 4, 4, 5]))
 
 # Filter all words from a sentence that are not stop words. Stop words = ["is", "the", "a", "an", "and", "to"].
+def filter_stop_word(text):
+    stop_words = ["is", "the", "a", "an", "and", "to"]
+    result = []
+    for i in text.split():
+        if i.lower() not in stop_words:
+            result.append(i)
+    return result
+
+print(filter_stop_word("This is the best way to learn and grow"))
+
 # Given a list of tuples (product, price), filter only items where price is between ₹100 and ₹1000.
+def filter_product(products):
+    result = []
+    for name, price in products:
+        if 100 <= price <=1000:
+            result.append((name,price))
+    return result
+
+print(filter_product([("Pen", 50),
+    ("Book", 150),
+    ("Bag", 950),
+    ("Laptop", 45000),
+    ("Shoes", 700)]))
+
 # From a list of numbers, keep only those whose digit sum is even.
+def digit_sum(num):
+    num = abs(num)
+    return sum(int(i) for i in str(num))
+def even_digit_sum(nums):
+    result = []
+    for j in nums:
+        if digit_sum(j) % 2 == 0:
+            result.append(j)
+    return result
+
+print(even_digit_sum([13, 28, 19, 22, 45, 100, 77]))
+            
 # Given a list of strings, filter only those that are valid Python identifiers (no spaces, no special chars, doesn't start with digit).
+def filter_valid_string(text):
+    result = []
+    for i in text:
+        if i.isidentifier():
+            result.append(i)
+    return result
+
+print(filter_valid_string(["name", "first_name", "2ndVar", "hello world", "valid123", "class"]))
+
 # Filter all numbers from a list that are larger than both their neighbours (local maximums).
+def local_maximums(num):
+    result = []
+    if len(num) < 3:
+        return result
+    for i in range(1, len(num) - 1):
+        left = num[i - 1]
+        current = num[i]
+        right = num[i + 1]
+        if current > left and current > right:
+            result.append(current)
+    return result
+
+print(local_maximums([1, 3, 2, 5, 4, 7, 6]))
+
 # From a list of sentences, filter only sentences that end with a question mark.
+def sentence_end(text):
+    result = []
+    for i in text:
+        if i.strip().endswith("?"):
+            result.append(i)
+    return result
+
+print(sentence_end(["How are you?",
+    "This is a statement.",
+    "Is this working?",
+    "No issues here."]))
+
 # Given a list of numbers, filter those that are perfect cubes.
+def is_perfect_cube(lst):
+    root = round(abs(lst) ** (1/3))
+    return root ** 3 == abs(lst)
+def filter_cube(cube):
+    result = []
+    for i in cube:
+        if is_perfect_cube(i):
+            result.append(i)
+    return result
+print(filter_cube([1, 8, 9, 27, 64, 100, -27, -8]))    
+
 # From a mixed list, filter only the string elements.
+def filter_strings(item):
+    result = []
+    for i in item:
+        if isinstance(i,str):
+            result.append(i)
+    return result
+
+print(filter_strings([1, "hello", 3.14, "world", True, "Python", None]))
+
 # Given a list of words, filter only those where all vowels come before all consonants.
+def vowel_before_conconent(text):
+    vowel = "aeiouAEIOU"
+    seen_conconent = False
+    for i in text:
+        if i in vowel:
+            if seen_conconent:
+                return False
+    else:
+        seen_conconent = True
+def filter_vowel(word):
+    return [j for j in word if vowel_before_conconent(j)]
+print(filter_vowel(["aeiobcd", "apple", "iouxyz", "banana", "aeiou", "ooofff"]))
+
 # From a list of numbers, keep only those where the number reversed is also in the list.
+def filter_reverse_num(num):
+    result = []
+    for i in num:
+        rev = int(str(i)[::-1])
+        if rev in num:
+            result.append(i)
+    return result
+
+print(filter_reverse_num([12,21, 34, 43, 56, 65, 99, 100]))
+
 # Count the frequency of each character in a string.
+def char_frequency(text):
+    result = {}
+    for i in text:
+        if i in result:
+            result[i] += 1
+        else:
+            result[i] = 1
+    return result
+print(char_frequency("hello"))
+
 # Given a list of numbers, find which number appears the most (mode).
+def num_appearence(num):
+    result = {}
+    for i in num:
+        if i in result:
+            result[i] += 1
+        else:
+            result[i] = 1
+    mode = max(result,key=result.get)
+    return mode
+print(num_appearence([1,1,2,3,4,1,5]))
+
 # Count the frequency of each word in a sentence.
+def word_frequency(word):
+    words = word.split()
+    frequency = {}
+    for i in words:
+        if i in frequency:
+            frequency[i] += 1
+        else:
+            frequency[i] = 1
+    return frequency
+
+print(word_frequency("this is a test this is only a test"))            
+
 # Given a list, find all elements that appear exactly twice.
+def find_exactly_twice(word):
+    freq = {}
+    for i in word:
+        if i in freq:
+            freq[i] += 1
+        else:
+            freq[i] = 1
+    return [i for i, count in freq.items() if count == 2] 
+print(find_exactly_twice([1, 2, 2, 3, 3, 3, 4, 4, 5]))
+
 # Count how many times each digit (0–9) appears in a given number.
+def count_digit(digit):
+    freq = {}
+    for i in str(digit):
+        if i in freq:
+            freq[i] += 1
+        else:
+            freq[i] = 1
+    return freq
+        
+print(count_digit(120340560789))
+            
 # Given a list of scores, count how many fall in each grade band: A(90+), B(75–89), C(60–74), D(below 60).
+def grade_distribution(marks):
+    band = {"A":0, "B":0, "C":0, "D":0}
+    for i in marks:
+        if i >= 90:
+            band["A"] += 1
+        elif i >= 75:
+            band["B"] += 1
+        elif i >= 60:
+            band["C"] += 1
+        else:
+            band["D"] += 1
+    return band
+print(grade_distribution([95, 82, 67, 45, 89, 74, 100, 59]))
+
 # Find the least frequent element in a list.
+def least_frequent(item):
+    freq = {}
+    for i in item:
+        if i in freq:
+            freq[i] += 1
+        else:
+            freq[i] = 1
+    return min(freq, key=freq.get)
+print(least_frequent([4, 2, 2, 3, 3, 3, 4, 5, 5, 5, 5]))
+
 # Given a paragraph, find the top 3 most frequent words.
+def top_3_words(paragraph):
+    word = paragraph.lower().split()
+    freq = {}
+    for i in word:
+        i = i.strip(".,!?") 
+        if i in freq:
+            freq[i] += 1
+        else:
+            freq[i] = 1
+    top_3 =  sorted(freq.items(), key=lambda x: x[1], reverse=True)[:3]
+    return top_3
+print(top_3_words("This is a test. This test is only a test, and this test is important."))
+        
 # Count the frequency of each vowel in a string.
+def vowel_count(words):
+    vowel = "aeiou"
+    count = {j: 0 for j in vowel}
+    for i in words.lower():
+        if i in vowel:
+            count[i] += 1
+    return count
+print(vowel_count("Hello Universe"))
+
 # Given a list, return a list of elements that appear more than n times.
+def more_than_n(lst, n):
+    freq = {}
+    for i in lst:
+        if i in freq:
+            freq[i] += 1
+        else:
+            freq[i] = 1
+    return [i for i, count in freq.items() if count > n]
+print(more_than_n([1,2,2,3,3,3,4,4,4,4,5], 3))
+
 # Given a list of words, count how many unique first letters exist.
+def unique_first_letter(word):
+    unique = set()
+    for i in word:
+        if i:
+            unique.add(i[0].lower())
+    return len(unique)
+print(unique_first_letter(["apple", "banana", "apricot", "cherry", "date", "blueberry"]))
+
 # Count how many times each unique length appears among a list of strings.
+def length_count(items):
+    result = {}
+    for i in items:
+        length =  len(i)
+        if length in result:
+            result[length] += 1
+        else:
+            result[length] = 1
+    return result
+print(length_count(["hi", "hey", "hello", "ok", "bye", "world", "no"]))       
+
 # Given a list of numbers, find all numbers that appear an odd number of times.
+def odd_frequency(item):
+    odd = {}
+    for i in item:
+        if i in odd:
+            odd[i] += 1
+        else:
+            odd[i] = 1
+    return [i for i, count in odd.items() if count % 2 == 1]
+print(odd_frequency([1,2,2,3,3,3,4,4,4,4,5,5,5]))
+
 # Given a list of transactions (positive = credit, negative = debit), count how many of each type.
+def type_of_transaction(transaction):
+    count = {"positive": 0, "negative": 0}
+    for i in transaction:
+        if i > 0:
+            count["positive"] += 1
+        else:
+            count["negative"] += 1
+    return count
+print(type_of_transaction([100, -50, 200, -30, 10, 400]))
+
 # Count the frequency of each day name in a list of date strings (format: "YYYY-MM-DD").
+import datetime
+
+def day_name_frequency(dates):
+    freq = {}
+    for i in dates:
+        day = datetime.datetime.strptime(i,"%Y-%m-%d").strftime("%A")
+        if day in freq:
+            freq[day] += 1
+        else:
+            freq[day] = 1
+    return freq
+print(day_name_frequency(["2026-08-06", "2026-08-07", "2026-08-06", "2026-08-08"]))
+            
 # Given a list of numbers, find the second most frequent element.
+def second_most_frequent(lst):
+    freq = {}
+    for i in lst:
+        freq[i] = freq.get(i, 0) + 1
+    
+    # sort by frequency (highest first)
+    sorted_freq = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+    
+    if len(sorted_freq) < 2:
+        return None   # not enough unique elements
+    return sorted_freq[1][0]   # second most frequent element
+
+print(second_most_frequent([1,2,2,3,3,3,4,4,4,4,5]))         
+
 # Count how many elements in a list appear only once (unique elements).
+def unique_elements(words):
+    unique = {}
+    for i in words:
+        unique[i] = unique.get(i,0) + 1
+    return sum(1 for count in unique.values() if count == 1)
+print(unique_elements([1,2,2,3,4,4,5,6,6,7]))
+
 # Given a sentence, count the frequency of each word length (e.g., "3-letter words: 4 times").
+def len_word_freq(lst):
+    word = lst.split()
+    freq = {}
+    for i in word:
+        length = len(i)
+        freq[length] = freq.get(length, 0) + 1
+    return freq
+print(len_word_freq("This is a simple test sentence with words of different lengths"))
+
 # Given a list of items, detect if any element appears more than half the total count.
+def has_majority_element(lst):
+    freq = {}
+    for num in lst:
+        freq[num] = freq.get(num, 0) + 1
+    half = len(lst) // 2
+    for value, count in freq.items():
+        if count > half:
+            return True, value   
+    return False, None        
+print(has_majority_element([1,2,2,2,2,3,4]))
+
 # Given two lists, count how many elements are common (appear in both), counting frequency.
+def common_count(lst1, lst2):
+    frequency_1 = {}
+    frequency_2 = {}
+    for i in lst1:
+        frequency_1[i] = frequency_1.get(i,0) + 1
+    for i in lst2:
+        frequency_2[i] = frequency_2.get(i,0) + 1
+    common_total = 0
+    for i in frequency_1:
+        if i in frequency_2:
+            common_total += min(frequency_1[i],frequency_2[i])
+    return common_total
+print(common_count([1,2,2,3,3,3,4], [2,2,3,3,5,6,3]))
+        
 # Given a list of numbers, return True if all numbers are positive.
+def number_check(lst):
+    for i in lst:
+        if i <= 0:
+            return False
+    return True
+print(number_check([1, -2, 3, 4]))
+
 # Check if a list is sorted in ascending order.
+def is_sorted_ascending(lst):
+    if len(lst) <= 1:
+        return True
+    for i in range(len(lst) -  1):
+        if lst[i] > lst[i + 1]:
+            return False
+    return True
+print(is_sorted_ascending([1, 2, 3, 4, 5]))
+
 # Given a list, return True if any two adjacent elements are equal.
+def has_adjacent_equal(lst):
+    for i in range(len(lst) - 1):
+        if lst[i] == lst[i + 1]:
+            return True
+    return False
+print(has_adjacent_equal([1, 2, 3, 5, 4]))
+
 # Given a number n, check if it is a perfect number (sum of its divisors equals itself). e.g., 6 = 1+2+3.
+def is_perfect(lst):
+    if lst <= 1:
+        return False
+    divisors_sum = 0
+    for i in range(1,lst):
+        if lst % i == 0:
+            divisors_sum += i
+    return divisors_sum == lst
+print(is_perfect(6))
+
 # Given two lists of equal length, return True if they are mirror images of each other.
+def are_mirror(lst1, lst2):
+    if len(lst1) != len(lst2):
+        return False
+    for i in range(len(lst1)):
+        if lst1[i] != lst2[-(i+1)]:
+            return False
+    return True
+print(are_mirror([1,2,3], [3,2,0])) 
+
 # Check if a given string is an anagram of another string.
+def is_anagram(str1, str2):
+    str1 = str1.replace(" ", "").lower()
+    str2 = str2.replace(" ", "").lower()
+    if len(str1) != len(str2):
+        return False
+    freq1 = {}
+    freq2 = {}
+    for i in str1:
+        freq1[i] = freq1.get(i,0) + 1
+    for i in str2:
+        freq2[i] = freq2.get(i,0) + 1
+    return freq1 == freq2
+print(is_anagram("listen", "silent"))
+            
 # Given a list of numbers, return True if there exists a pair that sums to a given target k.
+def has_pair_with_sum(lst, k):
+    seen = set()
+    for i in lst:
+        if (k-i) in seen:
+            return True
+        seen.add(i)
+    return False
+print(has_pair_with_sum([1,2,4,5],6))
+
 # Given a number, check if it's a Harshad number (divisible by the sum of its own digits).
+def is_harshad(num):
+    digit_sum = sum(int(i) for i in str(num))
+    return num % digit_sum == 0
+print(is_harshad(18)) 
+
 # Given a list, return True if it has more even numbers than odd numbers.
+def more_even(num):
+    even_count = 0
+    odd_count = 0
+    for i in num:
+        if i %2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        return even_count > odd_count
+print(more_even([2,4,6,7,9]))
+
 # Given a string, check if all characters are unique (no duplicates).
+def unique_string(str):
+    seen = set()
+    for i in str:
+        if i in seen:
+            return False
+        seen.add(i)
+    return True
+print(unique_string("abcd"))
+
 # Given a list of numbers, check if any number equals the sum of all others.
+def has_equal_sum(num):
+    total = sum(num)
+    for i in num:
+        if i == total - i:
+            return True
+    return False
+print(has_equal_sum([6,1,2,3]))
+
 # Given a word, check if it is a pangram sentence — contains every letter of the alphabet at least once.
+import string
+
+def is_pangram(sentence):
+    alphabet = set(string.ascii_lowercase)     
+    letters = set(sentence.lower())            
+    return alphabet.issubset(letters)
+print(is_pangram("The quick brown fox jumps over the lazy dog"))
+
 # Given a list of numbers, return True if the list contains a "peak" — a number greater than all before it and all after it.
+def has_peak(lst):
+    for i in range(1, len(lst)-1):          # skip first and last
+        if lst[i] > max(lst[:i]) and lst[i] > max(lst[i+1:]):
+            return True
+    return False
+
+print(has_peak([1,3,2,1]))   # True (3 is peak)
+print(has_peak([1,2,3,4]))   # False
+
 # Given two strings, check if one is a rotation of the other (e.g., "abcd" and "cdab").
+def is_rotation(s1, s2):
+    if len(s1) != len(s2): 
+        return False
+    return s2 in (s1 + s1)   # rotation must appear in doubled string
+
+print(is_rotation("abcd", "cdab"))  # True
+print(is_rotation("abcd", "acbd"))  # False
+
 # Given a list, check if it can be split into two halves with equal sums.
+def split_equal_sum(lst):
+    if len(lst) % 2 != 0: 
+        return False
+    mid = len(lst)//2
+    return sum(lst[:mid]) == sum(lst[mid:])
+
+print(split_equal_sum([1,2,3,6]))   # True (1+2=3, 3+6=9 → False actually)
+print(split_equal_sum([2,2,3,3]))   # True (2+2=4, 3+3=6 → False)
+
 # Given a number n, check if it is a Kaprekar number (e.g., 45² = 2025 → 20+25 = 45).
+def is_kaprekar(n):
+    sq = str(n*n)
+    right = int(sq[-len(str(n)):] or 0)
+    left = int(sq[:-len(str(n))] or 0)
+    return left + right == n
+
+print(is_kaprekar(45))   # True (2025 → 20+25=45)
+print(is_kaprekar(10))   # False
+
 # Given a list of booleans, return True if more than half are True.
+def majority_true(lst):
+    return sum(lst) > len(lst)//2
+
+print(majority_true([True, True, False]))   # True
+print(majority_true([True, False, False]))  # False
+
 # Given a list of numbers, check if removing exactly one element can make the list sorted.
+def can_be_sorted(lst):
+    count = 0
+    for i in range(len(lst)-1):
+        if lst[i] > lst[i+1]:
+            count += 1
+            if count > 1:
+                return False
+    return True
+
+print(can_be_sorted([1,2,5,3,4]))   # True (remove 5)
+print(can_be_sorted([3,2,1]))       # False
+
 # Given a string, check if the brackets (), [], {} are balanced and properly nested.
+def balanced_brackets(s):
+    stack = []
+    pairs = {')':'(', ']':'[', '}':'{'}
+    for ch in s:
+        if ch in pairs.values():
+            stack.append(ch)
+        elif ch in pairs:
+            if not stack or stack[-1] != pairs[ch]:
+                return False
+            stack.pop()
+    return not stack
+
+print(balanced_brackets("{[()]}"))   # True
+print(balanced_brackets("{[(])}"))   # False
+
 # Given a list of numbers, check if any subset of them (contiguous) sums to exactly zero.
+def has_zero_sum_subarray(lst):
+    seen = set()
+    total = 0
+    for num in lst:
+        total += num
+        if total == 0 or total in seen:
+            return True
+        seen.add(total)
+    return False
+
+print(has_zero_sum_subarray([1,2,-3,4]))   # True (1+2-3=0)
+print(has_zero_sum_subarray([1,2,3]))      # False
+

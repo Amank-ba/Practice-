@@ -1,13 +1,10 @@
-def filter_adults(age):
-    result = []
-    for i in age:
-        if i.get("age",0)>= 18:
-            result.append(i)
-    return result
-
-print(filter_adults([
-    {"name": "Aman", "age": 22},
-    {"name": "Ravi", "age": 16},
-    {"name": "Anita", "age": 18},
-    {"name": "Sunil", "age": 15}
-]))
+def more_even(num):
+    even_count = 0
+    odd_count = 0
+    for i in num:
+        if i %2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        return even_count > odd_count
+print(more_even([2,4,6,7,9,1,11,13]))
